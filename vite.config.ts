@@ -13,4 +13,10 @@ export default defineConfig({
   // Cloudflare Workers locally / on CF; Nitro on Vercel.
   cloudflare: isVercel ? false : undefined,
   plugins: isVercel ? [nitro()] : [],
+  vite: {
+    build: {
+      // Always emit image files; never inline as base64 (fixes missing logos on SSR).
+      assetsInlineLimit: 0,
+    },
+  },
 });
